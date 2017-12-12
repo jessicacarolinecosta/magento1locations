@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="head">
+			<action method="addCss"><stylesheet>css/bootstrap.min.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/style1.css</stylesheet></action>
+			<action method="addItem"><type>skin_js</type><name>js/bootstrap.min.js</name></action>
+		</reference>
+	</default>
+	<store_index_index>
+		<reference name="content">
+			<block type="store/location" name="testStore" template="location.phtml" />
+		</reference>
+		<reference name="root">
+			<action method="setTemplate"><template>page/1column.phtml</template></action>
+		</reference>
+	</store_index_index>
+	<store_index_search>
+		<reference name="content">
+			<block type="store/search" name="searchStore" template="search-location.phtml" />
+		</reference>
+		<reference name="root">
+			<action method="setTemplate"><template>page/1column.phtml</template></action>
+		</reference>
+	</store_index_search>
+	<store_index_position>
+		<reference name="content">
+			<block type="store/position" name="positionStore" template="position-location.phtml" />
+		</reference>
+		<reference name="root">
+			<action method="setTemplate"><template>page/1column.phtml</template></action>
+		</reference>
+	</store_index_position>
+</layout>

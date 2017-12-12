@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<config>
+
+	<modules>
+		<!-- ns_md -->
+		<Test_Store>
+			<version>1.0</version>
+		</Test_Store>
+	</modules>
+
+	<frontend>
+		<!-- khai bao router ben ngoai frontend -->
+		<routers>
+			<!-- ten router, nen de dang viet thuong cua ten md -->
+			<store>
+				<!-- dung ben ngoai frontend -->
+				<use>standard</use>
+				<args>
+					<!-- se tim kiem controller trong module nao -->
+					<module>Test_Store</module>
+					<!-- url se chay -->
+					<frontName>store</frontName>
+				</args>
+			</store>
+		</routers>
+		<layout>
+			<updates>
+				<store>
+					<file>location.xml</file>
+				</store>
+			</updates>
+		</layout>
+	</frontend>
+	<!-- config cho admin -->
+	<adminhtml>
+		<menu>
+			<!-- khai bao menu cha -->
+			<store module="store">
+				<title>Store Location</title>
+				<sort_order>120</sort_order>
+				<children>
+					<!-- Khai bao menu con -->
+					<location module="store">
+						<title>Manage Location</title>
+						<sort_order>0</sort_order>
+						<!-- action se chay: host/web/location(ten_cua_router_store)/adminhtml_location/index/index -->
+						<action>store/adminhtml_location</action>
+					</location>
+				</children>
+			</store>
+		</menu>
+		<acl>
+			<resources>
+				<admin>
+					<children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                    	<!-- ten section duoc tao trong system -->
+	                                    <store translate="title" module="store">
+	                                    	<!-- tieu de trong User->Roles->Permissions -->
+	                                        <title>Test Section ACL</title> 
+	                                        <sort_order>99</sort_order>
+	                                    </store>
+	                                </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+				</admin>
+			</resources>
+		</acl>
+	</adminhtml>
+	<admin>
+		<!-- khai bao router ten store ben trong backend -->
+		<routers>
+			<store>
+				<use>admin</use>
+				<args>
+					<module>Test_Store</module>
+					<!-- ten class khai bao o action tren -->
+					<frontName>location</frontName>
+				</args>
+			</store>
+		</routers>
+	</admin>
+
+	<global>
+		<models>
+			<!-- ten model -->
+			<store>
+				<class>Test_Store_Model</class>
+				<!-- khai bao resource, su dung o duoi -->
+				<resourceModel>store_resource</resourceModel>
+			</store>
+			<!-- ten resource -->
+			<store_resource>
+				<class>Test_Store_Model_Resource</class>
+				<entities>
+					<!-- ten thuc the (tuong ung voi 1 bang) -->
+					<location>
+						<table>location</table>
+					</location>
+				</entities>
+			</store_resource>
+		</models>
+		<resources>
+			<!-- khai bao tai nguyen ten store_setup, duong dan se duoc su dung trong sql -->
+			<store_setup>
+				<setup>
+					<module>Test_Store</module>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</store_setup>
+		</resources>
+		<helpers>
+			<store>
+				<class>Test_Store_Helper</class>
+			</store>
+		</helpers>
+		<blocks>
+			<store>
+				<class>Test_Store_Block</class>
+			</store>
+		</blocks>
+	</global>
+</config>

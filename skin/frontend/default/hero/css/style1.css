@@ -1,0 +1,19 @@
+#map {
+	height: 400px;
+}
+#form-search input[type='text'] {
+	width: 75%;
+}
+#form-search input[type='submit'] {
+	border: 0;
+	height: 30px;
+	padding: 0 8px;
+	background: #283a6d;
+	color: #cacaca;
+}
+#form-search h3 {
+	padding: 10px 0;
+}
+#position {
+	margin: 10px 0;
+}

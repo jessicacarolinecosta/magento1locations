@@ -1,0 +1,53 @@
+<?php
+$state = $this->getContent();
+?>
+<?php echo ($state) ? "<h2>Search Result</h2>" : "" ?>
+<div id="map"><?php if (!$state): ?>No Matches<?php endif ?></div>
+<?php if ($state): ?>
+<!-- callback function initMap -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJnO8_hu8aA-6miQE9aly3qcPwHpSFVY0&callback=initMap"></script>
+<script>
+	function initMap() {
+		var locations = [];
+		<?php $i = 0; 
+		foreach ($state as $key) {
+			echo "locations[".$i."] = { info: '".$key['title']."', lat: ".$key['latitude'].", long: ".$key['longitude']." }; ";
+			$i += 1;
+		}
+		?>
+
+		// Tao map moi trong div, focus vao vi tri lng va lat
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 4,
+			center: new google.maps.LatLng(locations[0].lat, locations[0].long),
+		});
+
+		// Doi tuong info moi
+		var infowindow = new google.maps.InfoWindow({});
+
+		var marker, i;
+		var image = {
+				url: '<?php echo Mage::getBaseUrl('media').'/theme/'.Mage::getStoreConfig('store/test/logo',Mage::app()->getStore()); ?>',
+				scaledSize: new google.maps.Size(30, 30)
+			};
+
+		for (i = 0; i < locations.length; i++) {
+			// Tao danh dau moi, voi map la bien map o tren
+			marker = new google.maps.Marker({
+				position: new google.maps.LatLng(locations[i].lat, locations[i].long),
+				map: map,
+				<?php echo file_exists(Mage::getBaseDir('media').'/theme/'.Mage::getStoreConfig('store/test/logo',Mage::app()->getStore())) ? "
+				icon: image" : "" ?>
+			});
+
+			// add su kien click cho danh dau
+			google.maps.event.addListener(marker, 'click', (function (marker, i) {
+				return function () {
+					infowindow.setContent(locations[i].info);
+					infowindow.open(map, marker);
+				}
+			})(marker, i));
+		}
+	}
+</script>
+<?php endif ?>

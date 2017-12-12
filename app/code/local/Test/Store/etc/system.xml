@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config>
+    <!-- tab moi hien thi -->
+    <tabs>
+        <newtab translate="label" module="customer">
+            <label>Location Config</label>
+            <sort_order>1</sort_order>
+        </newtab>
+    </tabs>
+    <sections>
+        <!-- ten section, co the tim trong etc/system.xml cua module -->
+        <store translate="label" module="store">
+        <class>separator-top</class>
+            <label>Store Location</label>
+            <tab>newtab</tab>
+            <sort_order>130</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <test translate="label">
+                    <label>Config Store</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <logo translate="label comment">
+                            <label>Location Icon</label>
+                            <comment>Allowed file types: jpeg, gif, png.</comment>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">theme</upload_dir>
+                            <base_url type="media" scope_info="1">theme</base_url>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </logo>
+                    </fields>
+                </test>
+            </groups>
+        </store>
+    </sections>
+</config>
